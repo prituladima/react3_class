@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SeasonDisplay from "./SeasonDisplay.js";
+import SeasonDisplay from "./SeasonDisplay";
+import Spinner from "./Spinner";
 
 class App extends React.Component {
 
     state = {lat: null, errorMessage: ''};//will call constructor wft?
     // constructor(props) {
     //     super(props);
-        //One way to init
-        // this.state = {lat: null, errorMessage: ''};
+    //One way to init
+    // this.state = {lat: null, errorMessage: ''};
+    // Don't
+    // this.state.lat = null;
 
     // }
-
 
 
     componentDidMount() {
@@ -35,7 +37,7 @@ class App extends React.Component {
         console.log('My component was just updated - it rerendered!');
     };
 
-    render() {
+    renderContent() {
         console.log('Render');
         if (this.state.errorMessage && !this.state.lat)
             return (
@@ -52,12 +54,18 @@ class App extends React.Component {
             );
         } else {
             return (
-                <div>
-                    Loading...
-                </div>
+                <Spinner message="Please allow site to see your location"/>
             );
         }
-    }
+    };
+
+    render() {
+        return (
+            <div className="border red">
+                {this.renderContent()}
+            </div>
+        );
+    };
 };
 
 
